@@ -1,0 +1,104 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "HTT Token API",
+    "description": "API documentation for the HTT Token ecosystem, including wallet, rewards, and booking integrations.",
+    "version": "v1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.htttoken.eth/v1",
+      "description": "Mainnet API Server"
+    }
+  ],
+  "paths": {
+    "/status": {
+      "get": {
+        "summary": "API Health Check",
+        "description": "Returns the server status",
+        "responses": {
+          "200": {
+            "description": "API is online"
+          }
+        }
+      }
+    },
+    "/wallet/balance/{address}": {
+      "get": {
+        "summary": "Get Wallet Balance",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "description": "Ethereum wallet address",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTT token balance returned"
+          }
+        }
+      }
+    },
+    "/rewards/claim": {
+      "post": {
+        "summary": "Claim Reward",
+        "requestBody": {
+          "description": "User info for claiming reward",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reward claim successful"
+          }
+        }
+      }
+    },
+    "/user/profile": {
+      "get": {
+        "summary": "Get Logged-in User Profile",
+        "responses": {
+          "200": {
+            "description": "Returns user profile info"
+          }
+        }
+      }
+    },
+    "/bookings/{vendorId}": {
+      "get": {
+        "summary": "Get Vendor Bookings",
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns bookings associated with a vendor"
+          }
+        }
+      }
+    }
+  }
+}
